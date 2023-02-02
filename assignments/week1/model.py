@@ -6,13 +6,12 @@ class LinearRegression:
     w: np.ndarray
     b: float
     """
+
     def __init__(self):
         self.w = None
         self.b = None
 
-    def fit(
-        self, X: np.ndarray, y: np.ndarray
-    ) -> None:
+    def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
         Closed form solution for Linear Regression.
 
@@ -57,7 +56,7 @@ class GradientDescentLinearRegression(LinearRegression):
         """
         N, D = X.shape
         X = np.hstack((np.ones((N, 1)), X))
-        self.w = np.zeros((D + 1, ))
+        self.w = np.zeros((D + 1,))
 
         for _ in range(epochs):
             self.w -= lr * self.compute_gradient(self.w, X, y)
@@ -65,7 +64,6 @@ class GradientDescentLinearRegression(LinearRegression):
     def compute_gradient(self, w, X, y):
         n = len(y)
         return -2 / n * X.T @ (y - X @ w)
-
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         """
