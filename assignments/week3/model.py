@@ -6,6 +6,7 @@ class MLP(torch.nn.Module):
     """
     Multi-Layer Perceptrons Model
     """
+
     def __init__(
         self,
         input_size: int,
@@ -30,8 +31,8 @@ class MLP(torch.nn.Module):
         self.init = initializer
         self.layers = [torch.nn.Linear(input_size, hidden_size)]
         for i in range(hidden_count - 1):
-          self.layers += [torch.nn.Linear(hidden_size, hidden_size)]
-        
+            self.layers += [torch.nn.Linear(hidden_size, hidden_size)]
+
         self.out = torch.nn.Linear(hidden_size, num_classes)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -47,6 +48,6 @@ class MLP(torch.nn.Module):
         self.init(x)
         x = x.view(x.shape[0], -1)
         for layer in self.layers:
-          x = self.actv(layer(x))
-        x = self.out(x) 
+            x = self.actv(layer(x))
+        x = self.out(x)
         return x
