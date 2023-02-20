@@ -1,6 +1,7 @@
 from typing import List
 
 from torch.optim.lr_scheduler import _LRScheduler
+import math
 
 
 class CustomLRScheduler(_LRScheduler):
