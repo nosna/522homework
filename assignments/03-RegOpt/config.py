@@ -26,7 +26,5 @@ class CONFIG:
     )
 
     transforms = Compose(
-        [
-            ToTensor(), Normalize(mean=[0.485, 0.456, 0.4], std=[0.229, 0.224, 0.2])
-        ]
+        [ToTensor(), Normalize(mean=[0.485, 0.456, 0.4], std=[0.229, 0.224, 0.2])]
     )
