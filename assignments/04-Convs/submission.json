@@ -2,11 +2,17 @@
     "assignment_name": "Convolutions",
     "contributors": [
         {
-            "name": "Change this to your name",
-            "pennkey": "MyPennKey"
+            "name": "Anisha Singrodia",
+            "pennkey": "singroa"
+        },
+        {
+            "name": "Runsheng Huang",
+            "pennkey": "rhuang99"
         }
     ],
     "sources": [
-        "Don't forget to list your sources/attribution here!"
+        "https://pytorch.org/docs/stable/generated/torch.nn.Conv2d.html",
+        "https://www.kaggle.com/code/mhiro2/simple-2d-cnn-classifier-with-pytorch",
+        "https://blog.paperspace.com/writing-cnns-from-scratch-in-pytorch/"
     ]
 }
