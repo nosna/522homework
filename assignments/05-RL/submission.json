@@ -1,16 +1,8 @@
 {
     "assignment_name": "RL",
     "contributors": [
-        {
-            "name": "Runsheng Huang",
-            "pennkey": "rhuang99"
-        },
-        {
-            "name": "Anisha Singrodia",
-            "pennkey": "singroa"
-        }
+        {"name": "Runsheng Huang", "pennkey": "rhuang99"},
+        {"name": "Anisha Singrodia", "pennkey": "singroa"},
     ],
-    "sources": [
-        "Don't forget to list your sources/attribution here!"
-    ]
+    "sources": ["Don't forget to list your sources/attribution here!"],
 }
