@@ -6,7 +6,7 @@
 import gymnasium as gym
 from customagent import Agent
 
-SHOW_ANIMATIONS = False
+SHOW_ANIMATIONS = True
 
 env = gym.make("LunarLander-v2", render_mode="human" if SHOW_ANIMATIONS else "none")
 observation, info = env.reset(seed=42)
