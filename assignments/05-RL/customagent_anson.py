@@ -11,12 +11,10 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 
-Transition = namedtuple('Transition',
-                        ('state', 'action', 'next_state', 'reward'))
+Transition = namedtuple("Transition", ("state", "action", "next_state", "reward"))
 
 
 class ReplayMemory(object):
-
     def __init__(self, capacity):
         self.memory = deque([], maxlen=capacity)
 
@@ -30,8 +28,8 @@ class ReplayMemory(object):
     def __len__(self):
         return len(self.memory)
 
-class DQN(nn.Module):
 
+class DQN(nn.Module):
     def __init__(self, n_observations, n_actions):
         super(DQN, self).__init__()
         self.layer1 = nn.Linear(n_observations, 128)
@@ -46,6 +44,7 @@ class DQN(nn.Module):
         x = F.relu(self.layer2(x))
         return self.layer3(x)
 
+
 BATCH_SIZE = 128
 GAMMA = 0.99
 EPS_START = 0.9
@@ -53,6 +52,7 @@ EPS_END = 0.05
 EPS_DECAY = 1000
 TAU = 0.005
 LR = 1e-4
+
 
 class Agent:
     def __init__(
@@ -79,10 +79,12 @@ class Agent:
 
         # Compute a mask of non-final states and concatenate the batch elements
         # (a final state would've been the one after which simulation ended)
-        non_final_mask = torch.tensor(tuple(map(lambda s: s is not None,
-                                            batch.next_state)), dtype=torch.bool)
-        non_final_next_states = torch.cat([s for s in batch.next_state
-                                                    if s is not None])
+        non_final_mask = torch.tensor(
+            tuple(map(lambda s: s is not None, batch.next_state)), dtype=torch.bool
+        )
+        non_final_next_states = torch.cat(
+            [s for s in batch.next_state if s is not None]
+        )
         state_batch = torch.cat(batch.state)
         action_batch = torch.cat(batch.action)
         reward_batch = torch.cat(batch.reward)
@@ -99,7 +101,9 @@ class Agent:
         # state value or 0 in case the state was final.
         next_state_values = torch.zeros(BATCH_SIZE)
         with torch.no_grad():
-            next_state_values[non_final_mask] = self.target_net(non_final_next_states).max(1)[0]
+            next_state_values[non_final_mask] = self.target_net(
+                non_final_next_states
+            ).max(1)[0]
         # Compute the expected Q values
         expected_state_action_values = (next_state_values * GAMMA) + reward_batch
 
@@ -117,8 +121,9 @@ class Agent:
     def act(self, observation: gym.spaces.Box) -> gym.spaces.Discrete:
         self.state = observation
         sample = random.random()
-        eps_threshold = EPS_END + (EPS_START - EPS_END) * \
-            math.exp(-1. * self.steps_done / EPS_DECAY)
+        eps_threshold = EPS_END + (EPS_START - EPS_END) * math.exp(
+            -1.0 * self.steps_done / EPS_DECAY
+        )
         self.steps_done += 1
         if sample > eps_threshold:
             with torch.no_grad():
@@ -132,7 +137,7 @@ class Agent:
             self.action = torch.tensor([[self.action_space.sample()]], dtype=torch.long)
         # print(self.action)
         return int(self.action[0])
-        
+
     def learn(
         self,
         observation: gym.spaces.Box,
@@ -144,5 +149,3 @@ class Agent:
             observation = None
         self.memory.push(self.state, self.action, observation, reward)
         self.optimize_model()
-
-    
